@@ -25,7 +25,7 @@ Follow these steps to set up and run GreenMetrics on your local machine.
 
    ```bash
    https://github.com/npriya2612/intel-unnati-project
-   cd greenmetrics
+   cd final_telemetry_project
    ```
 
 2. **Create a Virtual Environment:**
