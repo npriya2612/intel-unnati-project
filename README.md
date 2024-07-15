@@ -68,6 +68,11 @@ Follow these steps to set up and run GreenMetrics on your local machine.
 ![image](https://github.com/user-attachments/assets/71f2e733-a356-4603-8277-60cd660efc67)
 
 
+User telemetry data is collected in a JSON file, for every run, this can be used in the future for a more personalised analysis and dashboard
+![image](https://github.com/user-attachments/assets/891c5d6c-24f6-4864-ae52-ce48a6621824)
+
+
+
 ## Usage
 
 1. **Power Utilization:**
