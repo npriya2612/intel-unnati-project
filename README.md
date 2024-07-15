@@ -24,7 +24,7 @@ Follow these steps to set up and run GreenMetrics on your local machine.
 1. **Clone the Repository:**
 
    ```bash
-   git clone https://github.com/yourusername/greenmetrics.git
+   https://github.com/npriya2612/intel-unnati-project
    cd greenmetrics
    ```
 
