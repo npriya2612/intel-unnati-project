@@ -61,7 +61,11 @@ Follow these steps to set up and run GreenMetrics on your local machine.
 
    Open your web browser and go to `http://127.0.0.1:8000` to access GreenMetrics.
 
+   Here are some screenshots of how the dashboard looks:
+
 ![image](https://github.com/user-attachments/assets/1d956357-4e6f-4f75-a301-174ecc07b59d)
+![image](https://github.com/user-attachments/assets/64de5718-03ca-4deb-a5d3-04eb945e997e)
+![image](https://github.com/user-attachments/assets/71f2e733-a356-4603-8277-60cd660efc67)
 
 
 ## Usage
