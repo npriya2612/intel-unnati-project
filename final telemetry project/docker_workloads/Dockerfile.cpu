@@ -1,0 +1,4 @@
+# Dockerfile.cpu
+FROM python:3.9-slim
+COPY cpu_intensive.py /cpu_intensive.py
+CMD ["python", "/cpu_intensive.py"]

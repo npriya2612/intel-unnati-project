@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telemetry Results</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            padding-top: 4rem;
+        }
+        .centered-button {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="#">Telemetry Project</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'previous_data' %}">View Previous Data</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="jumbotron">
+            <h1 class="display-4">Telemetry Results</h1>
+            <ul>
+                <li>Average CPU Usage: {{ avg_cpu }}%</li>
+                <li>Average Disk IO (GB): {{ avg_disk_io }}</li>
+                <li>Average Memory Usage: {{ avg_memory }}%</li>
+                <li>Average Power Consumption: {{ avg_power }} Watts</li>
+            </ul>
+            <h2>Optimization Suggestions</h2>
+            <ul>
+                {% for suggestion in optimizations %}
+                    <li>{{ suggestion }}</li>
+                {% endfor %}
+            </ul>
+            <div class="centered-button">
+                <button class="btn btn-primary btn-lg" onclick="location.href='{% url 'index' %}'">Go Back</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenMetrics - Power Utilization</title>
+    <!-- Bootstrap CSS for styling -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <style>
+        body {
+            background-image: url('https://source.unsplash.com/1600x900/?green,eco,future'); /* Background image with eco-friendly theme */
+            background-size: cover; /* Cover the entire viewport */
+            background-position: center center; /* Center the background image */
+            color: #ffffff; /* Light text on dark background */
+            padding-top: 4rem; /* Adjust according to your navbar height */
+        }
+        .jumbotron {
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent dark background for jumbotron */
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            padding: 2rem;
+            margin-top: 3rem; /* Add margin to separate from navbar */
+        }
+        .card {
+            background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent dark background for card */
+            border: none; /* Remove card border */
+            color: #ffffff; /* Light text */
+            margin-top: 1rem; /* Space between cards */
+        }
+        .card-header {
+            background-color: rgba(0, 0, 0, 0.9); /* Darker header background */
+            border-bottom: 1px solid #28a745; /* Green border */
+            color: #28a745; /* Green text */
+            font-size: 1.2rem; /* Larger header text */
+        }
+        .card-body {
+            font-size: 1rem; /* Adjust body text size */
+        }
+        .tips {
+            margin-left: 20px;
+        }
+        .general-tips {
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent dark background */
+            border: 1px solid #28a745; /* Green border */
+            padding: 10px;
+            margin-top: 20px;
+            color: #28a745; /* Green text */
+        }
+        .centered-button {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        .btn-greenmetrics {
+            background-color: #28a745; /* Green button */
+            border-color: #28a745;
+            color: #ffffff; /* White text */
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+        .btn-greenmetrics:hover {
+            background-color: transparent; /* Transparent on hover */
+            border-color: #28a745;
+            color: #28a745; /* Green text on hover */
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="{% url 'index' %}">GreenMetrics</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+
+    <!-- Main content -->
+    <div class="container mt-5">
+        <div class="jumbotron">
+            <h1 class="display-4 text-center mb-4">Power Utilization Analysis</h1>
+
+            <div class="card">
+                <div class="card-header">Average CPU Percent</div>
+                <div class="card-body">
+                    {{ avg_cpu }}%
+                    <div class="tips">
+                        <strong>Tips:</strong>
+                        <ul>
+                            {% for tip in tips.cpu_tips %}
+                            <li>{{ tip }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Average Disk IO (GB)</div>
+                <div class="card-body">
+                    {{ avg_disk_io }} GB
+                    <div class="tips">
+                        <strong>Tips:</strong>
+                        <ul>
+                            {% for tip in tips.disk_tips %}
+                            <li>{{ tip }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Average Memory Percent</div>
+                <div class="card-body">
+                    {{ avg_memory }}%
+                    <div class="tips">
+                        <strong>Tips:</strong>
+                        <ul>
+                            {% for tip in tips.memory_tips %}
+                            <li>{{ tip }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Estimated Energy Usage</div>
+                <div class="card-body">
+                    {{ avg_energy_usage }} watts
+                    <div class="tips">
+                        <strong>Tips:</strong>
+                        <ul>
+                            {% for tip in tips.energy_tips %}
+                            <li>{{ tip }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="general-tips">
+                <strong>General Optimization Tips:</strong>
+                <ul>
+                    {% for tip in tips.general_tips %}
+                    <li>{{ tip }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="centered-button mt-4">
+                <a href="{% url 'index' %}" class="btn btn-greenmetrics btn-lg">Back to Home</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS for required functionality -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-rMfs57vO9IVxAbn8oFOh4iH4R/nfVauvMWe/ucfAW3qJqRQvP8tlmBf7JsD+Qpbp" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+YLdlsezVwV83ZxVvxbLQpmjZc+Vl5v8Fd-" crossorigin="anonymous"></script>
+</body>
+</html>

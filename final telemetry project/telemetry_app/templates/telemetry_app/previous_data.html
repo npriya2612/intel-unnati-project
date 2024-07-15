@@ -1,0 +1,22 @@
+<!-- templates/previous_data.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Previous Telemetry Data</title>
+</head>
+<body>
+    <h1>Previous Telemetry Data</h1>
+    
+    <ul>
+        {% for entry in telemetry_data %}
+            <li>
+                Timestamp: {{ entry.timestamp }} <br>
+                CPU Usage: {{ entry.cpu_usage }}% <br>
+                Memory Usage: {{ entry.memory_usage }}%
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

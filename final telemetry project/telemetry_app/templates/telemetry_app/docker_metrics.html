@@ -1,0 +1,37 @@
+<!-- docker_metrics.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Docker Metrics</title>
+</head>
+<body>
+    <h1>Docker Metrics</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Container ID</th>
+                <th>Image</th>
+                <th>Status</th>
+                <th>Created</th>
+                <th>CPU Percentage</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for metric in docker_metrics %}
+            <tr>
+                <td>{{ metric.container_id }}</td>
+                <td>{{ metric.image }}</td>
+                <td>{{ metric.status }}</td>
+                <td>{{ metric.created }}</td>
+                <td>{{ metric.cpu_percentage }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% if error %}
+    <p>{{ error }}</p>
+    {% endif %}
+</body>
+</html>

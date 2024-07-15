@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenMetrics - Monitor Energy Consumption</title>
+    <!-- Bootstrap CSS for styling -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            background-image: url('https://source.unsplash.com/1600x900/?green,eco,future'); /* Background image with eco-friendly theme */
+            background-size: cover; /* Cover the entire viewport */
+            background-position: center center; /* Center the background image */
+            color: #ffffff; /* Light text on dark background */
+        }
+        .content {
+            flex: 1 0 auto;
+        }
+        .footer {
+            flex-shrink: 0;
+            background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent dark background for footer */
+            color: #ffffff; /* Light text */
+            padding: 1rem 0;
+        }
+        .jumbotron {
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent dark background for jumbotron */
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            padding: 2rem;
+            margin-top: 3rem; /* Add margin to separate from navbar */
+        }
+        .centered-button {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        /* Custom button styles */
+        .btn-greenmetrics {
+            background-color: #28a745; /* Green button */
+            border-color: #28a745;
+            color: #ffffff; /* White text */
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+        .btn-greenmetrics:hover {
+            background-color: transparent; /* Transparent on hover */
+            border-color: #28a745;
+            color: #28a745; /* Green text on hover */
+        }
+        /* Loading spinner style */
+        .loading-spinner {
+            display: none; /* Initially hidden */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            color: #ffffff;
+            font-size: 1rem; /* Adjusted font size */
+        }
+        /* Responsive adjustments */
+        @media (max-width: 576px) {
+            .centered-button {
+                margin-top: 1rem; /* Reduce margin on small screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading spinner -->
+    <div class="loading-spinner" id="loadingSpinner">
+        Loading...
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="{% url 'index' %}">GreenMetrics</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+
+    <!-- Main content -->
+    <div class="container mt-5 content">
+        <div class="jumbotron">
+            <h1 class="display-4 text-center mb-4">Welcome to GreenMetrics</h1>
+            <p class="lead text-center mb-4">Monitor and optimize system energy consumption for a greener future.</p>
+            
+            {% if average_metrics %}
+                <h2 class="text-center mb-4">Average System Metrics</h2>
+                <ul class="list-unstyled">
+                    <li><strong>Average CPU Percent:</strong> {{ average_metrics.cpu_percent }}%</li>
+                    <li><strong>Average Disk IO (GB):</strong> {{ average_metrics.disk_io_gb }} GB</li>
+                    <li><strong>Average Memory Percent:</strong> {{ average_metrics.memory_percent }}%</li>
+                    <li><strong>Estimated Energy Usage:</strong> {{ estimated_energy_usage }} Watts</li>
+                </ul>
+            {% else %}
+                <div class="alert alert-info text-center mt-4" role="alert">
+                    Click "Power Utilization" to fetch metrics.
+                </div>
+            {% endif %}
+            
+            {% if error_message %}
+                <div class="alert alert-danger text-center mt-4" role="alert">
+                    Error: {{ error_message }}
+                </div>
+            {% endif %}
+            
+            <div class="centered-button mt-4">
+                <a href="{% url 'power_utilization' %}" class="btn btn-greenmetrics btn-lg" onclick="showLoading()">Power Utilization</a>
+            </div>
+
+            <!-- New button for Docker metrics -->
+            
+            
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container text-center">
+            <span>&copy; 2024 GreenMetrics. All rights reserved.</span>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS for required functionality -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-rMfs57vO9IVxAbn8oFOh4iH4R/nfVauvMWe/ucfAW3qJqRQvP8tlmBf7JsD+Qpbp" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+YLdlsezVwV83ZxVvxbLQpmjZc+Vl5v8Fd-" crossorigin="anonymous"></script>
+    
+    <script>
+        function showLoading() {
+            var loadingSpinner = document.getElementById('loadingSpinner');
+            loadingSpinner.style.display = 'block';  // Show loading spinner
+        }
+    </script>
+</body>
+</html>

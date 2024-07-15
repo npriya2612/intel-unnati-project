@@ -1,0 +1,7 @@
+# Dockerfile.disk
+FROM ubuntu:latest
+RUN apt-get update \
+    && apt-get install -y fio \
+    && rm -rf /var/lib/apt/lists/*
+
+CMD ["sh", "-c", "while true; do fio --filename=testfile --size=1G --time_based --runtime=60 --randrepeat=1 --ioengine=sync --iodepth=1 --direct=1 --fsync=1 --name=testjob; rm testfile; sleep 1; done"]
